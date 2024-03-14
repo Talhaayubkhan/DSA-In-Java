@@ -17,15 +17,17 @@ public class CoinsSystem {
 
           // Loop through the coins
           for (int i = 0; i < coins.length; i++) {
-               // If the current coin is less than or equal to the amount, add it to the
-               // ArrayList and update the amount and coin count
+               // If the current coin is less than or equal to the amount
                if (coins[i] <= amount) {
-                    // Increment the coin count
-                    coinCount++;
-                    // Add the current coin to the ArrayList
-                    ans.add(coins[i]);
-                    // Subtract the current coin from the amount
-                    amount -= coins[i];
+                    // Keep adding the current coin denomination until it's no longer possible
+                    while (coins[i] <= amount) {
+                         // Increment the coin count
+                         coinCount++;
+                         // Add the current coin to the ArrayList
+                         ans.add(coins[i]);
+                         // Subtract the current coin from the amount
+                         amount -= coins[i];
+                    }
                }
           }
 
