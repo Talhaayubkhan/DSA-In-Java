@@ -10,7 +10,7 @@ public class CoinsSystem {
 
           // Initialize variables for coin count and amount
           int coinCount = 0;
-          int amount = 590;
+          int amount = 1050;
 
           // Create an ArrayList to store the coins
           ArrayList<Integer> ans = new ArrayList<>();
