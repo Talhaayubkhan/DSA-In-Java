@@ -46,8 +46,11 @@ public class BuildPreorderTree {
           // Method to perform preorder traversal of the binary tree
           public static void preorder(Node root) {
                // Base case: If the root is null, return
-               if (root == null)
+               if (root == null) {
+                    System.out.print("-1, ");
                     return;
+               }
+               // System.out.print(root.data + " ");
 
                // Print the data of the current node
                System.out.print(root.data + " ");
