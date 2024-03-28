@@ -1,5 +1,7 @@
 package BinarySearch;
 
+import java.util.*;
+
 // Define a class to create a binary tree from a given array
 public class BuildPreorderTree {
 
@@ -95,6 +97,52 @@ public class BuildPreorderTree {
                System.out.print(root.data + " ");
           }
 
+          // Method to perform level-order traversal of the binary tree
+          public static void levelOrder(Node root) {
+
+               // If the root is null, return
+               if (root == null) {
+                    return;
+               }
+
+               // Create a queue to store nodes to be processed
+               Queue<Node> q = new LinkedList<>();
+               // Enqueue the root node to start traversal
+               q.add(root);
+               // Enqueue a marker (null) to indicate the end of each level
+               q.add(null);
+
+               // Loop until the queue is empty
+               while (!q.isEmpty()) {
+                    // Dequeue the current node
+                    Node currNode = q.remove();
+
+                    // Check if the current node is a marker (end of level)
+                    if (currNode == null) {
+                         // Print a newline to start a new level
+                         System.out.println();
+                         // If the queue is empty, break out of the loop
+                         if (q.isEmpty()) {
+                              break;
+                         } else {
+                              // Enqueue another marker to indicate the end of the next level
+                              q.add(null);
+                         }
+                    } else {
+                         // Print the data of the current node
+                         System.out.print(currNode.data + " ");
+
+                         // Enqueue the left child if it exists
+                         if (currNode.left != null) {
+                              q.add(currNode.left);
+                         }
+                         // Enqueue the right child if it exists
+                         if (currNode.right != null) {
+                              q.add(currNode.right);
+                         }
+                    }
+               }
+          }
      }
 
      // Main method to demonstrate the construction of the binary tree
@@ -108,7 +156,7 @@ public class BuildPreorderTree {
           // Build the binary tree from the preorder traversal array
           Node root = tree.buildTree(nodes);
 
-          // Perform postorder traversal and print the nodes
-          tree.postorder(root);
+          // Perform level-order traversal and print the nodes
+          tree.levelOrder(root);
      }
 }
