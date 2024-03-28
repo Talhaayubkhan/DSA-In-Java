@@ -47,12 +47,11 @@ public class BuildPreorderTree {
           public static void preorder(Node root) {
                // Base case: If the root is null, return
                if (root == null) {
-                    System.out.print("-1, ");
+                    System.out.print("-1, "); // Print -1 to indicate a null node
                     return;
                }
-               // System.out.print(root.data + " ");
 
-               // Print the data of the current node
+               // Print the data of the current node before traversing its children
                System.out.print(root.data + " ");
 
                // Recursively traverse the left subtree
@@ -61,6 +60,41 @@ public class BuildPreorderTree {
                // Recursively traverse the right subtree
                preorder(root.right);
           }
+
+          // Method to perform inorder traversal of the binary tree
+          public static void inorder(Node root) {
+               // Base case: If the root is null, return
+               if (root == null) {
+                    return;
+               }
+
+               // Recursively traverse the left subtree
+               inorder(root.left);
+
+               // Print the data of the current node in between traversing its left and right
+               // children
+               System.out.print(root.data + " ");
+
+               // Recursively traverse the right subtree
+               inorder(root.right);
+          }
+
+          // Method to perform postorder traversal of the binary tree
+          public static void postorder(Node root) {
+               // Base case: If the root is null, return
+               if (root == null)
+                    return;
+
+               // Recursively traverse the left subtree
+               postorder(root.left);
+
+               // Recursively traverse the right subtree
+               postorder(root.right);
+
+               // Print the data of the current node after traversing its children
+               System.out.print(root.data + " ");
+          }
+
      }
 
      // Main method to demonstrate the construction of the binary tree
@@ -74,7 +108,7 @@ public class BuildPreorderTree {
           // Build the binary tree from the preorder traversal array
           Node root = tree.buildTree(nodes);
 
-          // Perform preorder traversal and print the nodes
-          tree.preorder(root);
+          // Perform postorder traversal and print the nodes
+          tree.postorder(root);
      }
 }
