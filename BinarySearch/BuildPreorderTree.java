@@ -98,6 +98,8 @@ public class BuildPreorderTree {
           }
 
           // Method to perform level-order traversal of the binary tree
+
+          // Time Complexity: O(n), where n is the number of nodes in the binary tree
           public static void levelOrder(Node root) {
 
                // If the root is null, return

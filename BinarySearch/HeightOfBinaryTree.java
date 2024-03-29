@@ -18,6 +18,8 @@ public class HeightOfBinaryTree {
      }
 
      // Method to calculate the height of a binary tree
+
+     // Time Complexity: O(n), where n is the number of nodes in the binary tree
      public static int binaryTreeHeight(Node root) {
           // Base case: If the root is null, height is 0
           if (root == null)
