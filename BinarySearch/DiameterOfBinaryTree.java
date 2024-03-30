@@ -16,6 +16,7 @@ public class DiameterOfBinaryTree {
      }
 
      // Method to calculate the height of a binary tree
+     // Time complexity: O(n) where n is the number of nodes in the tree
      public static int binaryTreeHeight(Node root) {
           // Base case: If the root is null, height is 0
           if (root == null)
@@ -31,6 +32,7 @@ public class DiameterOfBinaryTree {
      }
 
      // Method to calculate the diameter of a binary tree
+     // Time complexity: O(n^2) where n is the number of nodes in the tree
      public static int diameterOfBinaryTree(Node root) {
           if (root == null) {
                return 0; // Base case: if the root is null, diameter is 0
