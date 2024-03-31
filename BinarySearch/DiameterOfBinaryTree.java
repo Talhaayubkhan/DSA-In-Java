@@ -54,7 +54,41 @@ public class DiameterOfBinaryTree {
           return maxDiameter; // Return the maximum diameter
      }
 
-     // Main method to test the functionality
+     static class Info {
+          int diam;
+          int height;
+
+          // Constructor to initialize diameter and height
+          public Info(int diam, int height) {
+               this.diam = diam;
+               this.height = height;
+          }
+     }
+
+     // Calculate the diameter of binary tree in an optimized way
+     // Time complexity: O(n) where n is the number of nodes in the binary tree
+     public static Info optimizeBinaryTreeDiameter(Node root) {
+          // Base case: if the root is null, diameter is 0 and height is 0
+          if (root == null) {
+               return new Info(0, 0);
+          }
+
+          // Recursively calculate the Info for the left and right subtrees
+          Info leftInfo = optimizeBinaryTreeDiameter(root.left);
+          Info rightInfo = optimizeBinaryTreeDiameter(root.right);
+
+          // Calculate diameter passing through the current node
+          int diam = Math.max(Math.max(leftInfo.diam, rightInfo.diam), leftInfo.height + rightInfo.height + 1);
+
+          // Calculate height of the current subtree
+          // Height calculation excludes the additional 1 added for the diameter passing
+          // through the current node
+          int height = Math.max(leftInfo.height, rightInfo.height) + 1;
+
+          // Return Info object containing diameter and height of the current subtree
+          return new Info(diam, height);
+     }
+
      public static void main(String[] args) {
 
           // Create the binary tree
@@ -67,6 +101,7 @@ public class DiameterOfBinaryTree {
           // root.right.right = new Node(7);
 
           // Calculate and print the diameter of the tree
-          System.out.println("Diameter of Tree is " + diameterOfBinaryTree(root));
+          // System.out.println("Diameter of Tree is " + diameterOfBinaryTree(root));
+          System.out.println("Diameter of Binary Tree is " + optimizeBinaryTreeDiameter(root).diam);
      }
 }
