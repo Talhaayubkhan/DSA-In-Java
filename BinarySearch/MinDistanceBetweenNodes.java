@@ -95,7 +95,7 @@ public class MinDistanceBetweenNodes {
           root.right.left = new Node(6);
           root.right.right = new Node(7);
 
-          int n1 = 4, n2 = 6;
+          int n1 = 5, n2 = 3;
           // Printing the minimum distance between nodes n1 and n2
           System.out.println("Distance between Nodes are = " + minDistance(root, n1, n2));
      }
