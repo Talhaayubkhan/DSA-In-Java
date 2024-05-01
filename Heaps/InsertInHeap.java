@@ -1,103 +1,114 @@
 import java.util.*;
 
 public class InsertInHeap {
+      // Define a static inner class `Heap` to represent a min-heap.
       static class Heap {
-            // The internal representation of the heap using an ArrayList
+            // Use an ArrayList to dynamically store heap elements.
             ArrayList<Integer> arr = new ArrayList<>();
 
-            // Add a new element to the heap
+            // Method to add a new element to the heap.
             public void add(int data) {
-                  // Add the new element to the end of the array
+                  // Add the new element to the last index of the array.
                   arr.add(data);
 
-                  // Initialize child and parent indices
-                  int x = arr.size() - 1; // index of the newly added element
-                  int par = (x - 1) / 2; // parent index
+                  // Get the index of the newly added element.
+                  int x = arr.size() - 1;
 
-                  // Percolate the new element up to maintain the min-heap property
+                  // Calculate the index of its parent.
+                  int par = (x - 1) / 2;
+
+                  // Loop to maintain the min-heap property by percolating up.
                   while (x > 0 && arr.get(x) < arr.get(par)) {
-                        // Swap the child with its parent
-                        int temp = arr.get(x);
-                        arr.set(x, arr.get(par));
-                        arr.set(par, temp);
+                        // Swap the child with its parent if the child is smaller.
+                        int temp = arr.get(x); // Temporary storage for the child element.
+                        arr.set(x, arr.get(par)); // Move the parent to the child's position.
+                        arr.set(par, temp); // Move the child to the parent's position.
 
-                        // Update indices for the next iteration
-                        x = par; // move to the parent index
-                        par = (x - 1) / 2; // calculate the new parent index
+                        // Update the current index to the parent for the next iteration.
+                        x = par;
+                        par = (x - 1) / 2; // Recalculate the parent index.
                   }
             }
 
-            // Get the top element (minimum) without removing it
+            // Method to get the top element (the smallest one) without removing it.
             public int peek() {
-                  return arr.get(0); // the root of the heap
+                  return arr.get(0); // Return the root of the heap.
             }
 
-            // Maintain the min-heap property by "heapifying" a given index
+            // Method to ensure the heap property is maintained.
             private void heapify(int i) {
-                  // Calculate the indices for the left and right children
-                  int left = 2 * i + 1;
-                  int right = 2 * i + 2;
-                  int minHeapIdx = i; // index of the minimum element
+                  // Calculate the indices of the left and right children.
+                  int left = 2 * i + 1; // Left child index.
+                  int right = 2 * i + 2; // Right child index.
 
-                  // Determine if the left child is smaller than the current minimum
+                  // Start with the current index as the minimum.
+                  int minHeapIdx = i;
+
+                  // Check if the left child exists and is smaller than the current minimum.
                   if (left < arr.size() && arr.get(minHeapIdx) > arr.get(left)) {
-                        minHeapIdx = left;
+                        minHeapIdx = left; // Update the minimum index to the left child.
                   }
 
-                  // Determine if the right child is smaller than the current minimum
+                  // Check if the right child exists and is smaller than the current minimum.
                   if (right < arr.size() && arr.get(minHeapIdx) > arr.get(right)) {
-                        minHeapIdx = right;
+                        minHeapIdx = right; // Update the minimum index to the right child.
                   }
 
-                  // If the current element is not the minimum, swap and continue heapifying
+                  // If the current index is not the minimum, perform a swap to maintain the heap
+                  // property.
                   if (minHeapIdx != i) {
-                        int temp = arr.get(i);
-                        arr.set(i, arr.get(minHeapIdx));
-                        arr.set(minHeapIdx, temp);
+                        // Swap the current index with the new minimum index.
+                        int temp = arr.get(i); // Temporarily store the current value.
+                        arr.set(i, arr.get(minHeapIdx)); // Move the minimum child to the current index.
+                        arr.set(minHeapIdx, temp); // Set the original current value to the new minimum index.
 
-                        // Recursively heapify from the new minimum index
-                        heapify(minHeapIdx);
+                        // Recursively call `heapify` on the new minimum index to ensure the heap
+                        // property is restored.
+                        heapify(minHeapIdx); // Continue heapifying from the new position.
                   }
             }
 
-            // Remove and return the top element (minimum) from the heap
+            // Method to remove and return the top element (minimum) from the heap.
             public int remove() {
-                  // Get the top element to return
+                  // Get the top element to return.
                   int data = arr.get(0);
 
-                  // Swap the root with the last element
+                  // Swap the first and last elements.
                   int temp = arr.get(0);
-                  arr.set(0, arr.get(arr.size() - 1));
-                  arr.set(arr.size() - 1, temp);
+                  arr.set(0, arr.get(arr.size() - 1)); // Move the last element to the root.
+                  arr.set(arr.size() - 1, temp); // Move the root to the last index.
 
-                  // Remove the last element
+                  // Remove the last element from the array.
                   arr.remove(arr.size() - 1);
 
-                  // Heapify from the root to restore the min-heap property
-                  heapify(0);
+                  // Call `heapify` from the root to maintain the min-heap property.
+                  heapify(0); // Start restoring the heap from the root.
 
-                  return data; // return the removed element
+                  return data; // Return the removed element.
             }
 
-            // Check if the heap is empty
+            // Method to check if the heap is empty.
             public boolean isEmpty() {
-                  return arr.size() == 0; // return true if there are no elements in the heap
+                  return arr.size() == 0; // Return true if the heap has no elements.
             }
       }
 
-      // Main method to test the heap
+      // Main method to test the heap functionality.
       public static void main(String[] args) {
-            // Create a new heap and add elements to it
+            // Create a new heap and add several elements.
             Heap h = new Heap();
-            h.add(3);
+            h.add(3); // Add elements to the heap.
             h.add(4);
             h.add(1);
             h.add(5);
 
-            // Remove elements from the heap until it is empty
+            // Loop while the heap is not empty.
             while (!h.isEmpty()) {
+                  // Print the top element before removing it.
                   System.out.println("Top element before removal: " + h.peek());
-                  h.remove(); // remove the top element and heapify
+
+                  // Remove the top element and restore the heap structure.
+                  h.remove();
             }
       }
 }
