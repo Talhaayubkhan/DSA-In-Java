@@ -1,16 +1,22 @@
 public class Palindrome {
     public static boolean isPalindrome(String str) {
+        char[] charArray = str.toCharArray();
+        int start = 0;
+        int end = charArray.length - 1;
 
-        for (int i = 0; i < str.length() / 2; i++) {
-            if (str.charAt(i) != str.charAt(str.length() - 1 - i)) {
+        while (start < end) {
+            if (charArray[start] != charArray[end]) {
                 return false;
             }
+            start++;
+            end--;
         }
-        return true;
+        return true; // All characters match, so the string is a palindrome. }
     }
 
     public static void main(String[] args) {
-        String str = "Hello";
+        String str = "madam";
+
         System.out.println(isPalindrome(str));
     }
 }
